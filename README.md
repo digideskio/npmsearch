@@ -44,20 +44,21 @@ See the [elasticsearch docs](http://www.elasticsearch.org/guide/en/elasticsearch
 
 # create an index
 
-curl -XPUT http://localhost:9200/my-index-name
+curl -XPUT http://localhost:9200/npmsearch-index
 
 # setup the package field mappings
 
-cat mappings.json | curl -v -XPOST http://localhost:9200/my-index-name/package/_mapping -H "Content-type: application/json" -d @-
+cat mappings.json | curl -v -XPOST http://localhost:9200/npmsearch-index/package/_mapping -H "Content-type: application/json" -d @-
 
 # setup an alias to 'registry'
+```
 
-curl -XPOST 'http://localhost:9201/_aliases' -d '
-{
-  "actions" : [
-    { "add" : { "index" : "my-index-name", "alias" : "registry" } }
-  ]
-}'
+curl --request POST \
+--data '{"actions" : [{ "add" : { "index" : "npmsearch-index", "alias" : "registry" } }]}' \
+ http://localhost:9201/_aliases
+
+
+curl -XPOST http://localhost:9201/_aliases -d '{"actions" : [{ "add" : { "index" : "npmsearch-index", "alias" : "registry" } }]}'
 
 ```
 

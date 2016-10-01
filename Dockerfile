@@ -8,4 +8,4 @@ COPY package.json .
 RUN npm install --production  
 COPY . . 
 
-CMD ["node", "bin/server.js"] 
+CMD ["node", "bin/server.js", "--es=\"http://localhost:9200/registry\""] 
