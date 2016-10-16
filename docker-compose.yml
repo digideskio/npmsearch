@@ -1,12 +1,12 @@
-# Example compose file...currently does not work.
+ns:
+  image: npmsearch
+  ports: 
+    - "8080:8080" 
 
-elasticsearch:
-  build: elasticsearch
-  working_dir: /data
-  command: /elasticsearch/bin/elasticsearch -Des.config=/data/config/elasticsearch.yml
-  volumes:
-    - /var/lib/docker/npmsearch/elasticsearch/data:/data
-    - ./elasticsearch/config:/data/config
+es:
+  image: elasticsearch
   ports:
-    - "9200:9200"
-    - "9300:9300"
+   - "9200:9200"
+   - "9300:9300"
+  volumes:
+   - ./data:/usr/share/elasticsearch/data
